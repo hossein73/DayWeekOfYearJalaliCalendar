@@ -7,14 +7,14 @@ using namespace std;
 
 class DayOfYear {
 public:
-			DayOfYear(int year, int month, int day ,int dayofweak);
+			DayOfYear(int year, int month, int day ,int dayofweek);
 	int		getDay(int year, int month, int day);
 private:
 	int Year;
 	int Month;
 	int Day;
 
-	int DayOfWeak;
+	int DayOfWeek;
 	
 	int MonthDays[13] = { 0,31,31,31,31,31,31,30,30,30,30,30,29 };
 
@@ -26,11 +26,11 @@ private:
 	int	getDayRes(int res);
 };
 
-DayOfYear::DayOfYear(int year, int month, int day, int dayofweak) {
+DayOfYear::DayOfYear(int year, int month, int day, int dayofweek) {
 	this->Year = year;
 	this->Month = month;
 	this->Day = day;
-	this->DayOfWeak = dayofweak;
+	this->DayOfWeek = dayofweek;
 }
 
 int DayOfYear::checkDirection(int year, int month, int day) {
@@ -124,7 +124,7 @@ int DayOfYear::getDay(int year, int month, int day) {
 	int res = 0;
 	if (check == 0) {
 		//curent point
-		return this->DayOfWeak;
+		return this->DayOfWeek;
 	}
 	else if (check == 1) {
 		//forward direction
@@ -146,7 +146,7 @@ int DayOfYear::getDay(int year, int month, int day) {
 			sum_d += this->Day;
 			sum_d += getDaysBetweenMonths(1, (this->Month - 1), year);
 		}
-		res = this->DayOfWeak - (sum_d % 7);
+		res = this->DayOfWeek - (sum_d % 7);
 	}
 	else if (check == -1) {
 		//backward direction
@@ -168,7 +168,7 @@ int DayOfYear::getDay(int year, int month, int day) {
 			sum_d += getDaysBetweenMonths(1, (month-1), year);
 			sum_d += day;
 		}
-		res = (this->DayOfWeak) + (sum_d % 7);
+		res = (this->DayOfWeek) + (sum_d % 7);
 	}
 
 	return getDayRes(res);
